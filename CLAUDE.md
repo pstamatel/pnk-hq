@@ -40,6 +40,15 @@ Default behavior rules:
 - Never modify files in `/pm` during dev tasks without explicit request —
   that's the PM workspace.
 
+## Response style
+
+**Short by default, expand when needed.**
+
+- Default: brief and direct. Answer, state results, move on. No preamble ("great question!"), no rehash of what the user just said, no over-summarizing.
+- Expand when: the question is genuinely complex, meaningful tradeoffs are worth surfacing, or a decision depends on information the user doesn't have yet.
+- Headings, tables, and bullet lists earn their place when information is parallel or complex. For simple answers, one paragraph — or one line — beats a structured list.
+- One-line updates during tool use (*"reading the spec", "creating the task"*) are fine; silence isn't.
+
 ## Task management
 
 Tasks live in **ClickUp**; the repo owns scope and durable context. They reference each other — they don't mirror.
