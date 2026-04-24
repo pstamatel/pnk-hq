@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "clickup-pnk": {
+      "type": "http",
+      "url": "https://mcp.clickup.com/mcp"
+    }
+  }
+}

@@ -40,6 +40,26 @@ Default behavior rules:
 - Never modify files in `/pm` during dev tasks without explicit request —
   that's the PM workspace.
 
+## Task management
+
+Tasks live in **ClickUp**; the repo owns scope and durable context. They reference each other — they don't mirror.
+
+- **ClickUp list:** **Goethe** (`901510874240`) — path `Workspace > Team Space > Clients > Goethe`. MCP server: `clickup-pnk`.
+- **ClickUp** for anything with lifecycle state: work items, assignees, due dates, dependencies.
+- **Repo markdown** for scope ([deliverables.md](deliverables.md)), decisions, research, stakeholders, meeting notes.
+
+### For Claude
+
+- "Create a task / what's open / due this week?" → use the ClickUp MCP (`clickup-pnk`) against the **Goethe** list (`901510874240`).
+- "What was promised / note this decision / summarize the meeting?" → repo markdown.
+- **Crossover:** action items captured in meeting notes get created as ClickUp tasks, with the task IDs/URLs pasted back into the note for traceability.
+- **Scope vs work:** [deliverables.md](deliverables.md) checkboxes reflect *organizer sign-off* — a scope state. A ClickUp task can be "done" for weeks before the corresponding checkbox is ticked.
+
+### Light ClickUp convention (to seed before the list grows)
+
+- **Custom field `spec_ref`** (text) — e.g. `A8#4`, `A6.8` — cross-reference to the offer spec.
+- **Tags** — `phase-1` / `phase-2` / `phase-3` for lifecycle; `pm` / `dev` / `organizer` for who's acting.
+
 ## Tech stack
 
 _TBD — to be decided before implementation. Document here once set._

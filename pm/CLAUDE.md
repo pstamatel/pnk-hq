@@ -40,6 +40,21 @@ Her preferred language is **Greek**, but she is transitioning to English.
   speakers, partners).
 - **Timeline & tracking** — what's in flight, what's blocked, what's next.
 
+## Helping with research
+
+When Konstantina asks for research help on a task tied to a file under `pm/research/`:
+
+1. **Start from the ClickUp task** (linked at the top of the research file). The task holds the specific goal, hunting grounds, evaluation criteria, and due date. The research file is the output container — follow its template exactly.
+2. **Find candidates with `WebSearch`**, one hunting-ground category at a time. Don't dump 50 raw links at her — pre-filter by title/snippet and surface roughly 2× the target depth as shortlist candidates for her to narrow down.
+3. **Analyze each shortlisted site with `WebFetch`.** Extract the template fields from the HTML. Fill the entry in the research file.
+4. **Flag limitations honestly — don't fake what you can't see:**
+   - **Screenshots:** you cannot take them. Note `[screenshot needed]` where a visual detail matters.
+   - **Aesthetic judgment:** describe what you can observe objectively ("large hero photo, centered CTA, sans-serif headlines"); leave subjective calls ("feels right for this brand") to her.
+   - **JS-heavy sites:** if `WebFetch` returns near-empty HTML, say so and ask her to open the site in a browser — do not guess at content that isn't in the response.
+5. **Respect the target depth** stated in the file. If the target is 8–15, don't add 40 — deeper analysis of fewer sites beats a shallow survey. Stop and check in when you're near the upper bound.
+6. **Keep entries consistent.** Same fields, same ordering, same tone, across every entry.
+7. **Language:** Greek by default (per the language strategy above); offer an English pass once she has reviewed the Greek entries.
+
 ## What you do NOT do here
 
 - **No code changes**, no dev commands (`npm`, `git` commits, builds, deploys,
