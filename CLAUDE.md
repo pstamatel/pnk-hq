@@ -14,14 +14,30 @@ Full offer and functional spec: [Specs/Goethe offer Deutsch bewegt website.md](S
 Two collaborators with different modes:
 
 - **Panagiotis — developer.** All code, infrastructure, implementation.
-- **Partner — research & project management.** No coding tasks. Her workspace
-  is [pm/](pm/) — follow [pm/CLAUDE.md](pm/CLAUDE.md) when working there.
+- **Konstantina — research & project management.** No coding tasks.
+  Her workspace is [pm/](pm/) — follow [pm/CLAUDE.md](pm/CLAUDE.md) when
+  working there.
 
-## Default behavior
+## Persona inference — don't ask, infer
 
-- Inside [pm/](pm/), follow [pm/CLAUDE.md](pm/CLAUDE.md).
+Do **not** start sessions with "who am I talking to?". Infer from context:
+
+1. **Working directory.** If CWD is inside `/pm`, assume PM persona
+   (Konstantina) and apply [pm/CLAUDE.md](pm/CLAUDE.md). Otherwise, assume
+   developer (Panagiotis).
+2. **First-message signals** sharpen the inference:
+   - Greek + research / meeting / stakeholder / email / decision-log /
+     timeline tasks → PM.
+   - English + code / infra / deploy / refactor / tech-decision tasks → dev.
+3. **Confirm only when signals conflict** — e.g. a clearly PM task at repo
+   root, or a clearly dev task while in `/pm`. A one-line check is enough:
+   *"Quick check — is this PM work or dev work? (sets how I proceed.)"*
+
+Default behavior rules:
+
+- Inside [pm/](pm/), `pm/CLAUDE.md` extends and overrides this file.
 - Everywhere else, full developer mode.
-- Never modify files in `/pm` during code tasks without explicit request —
+- Never modify files in `/pm` during dev tasks without explicit request —
   that's the PM workspace.
 
 ## Tech stack
