@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Deutsch bewegt! — Project kickoff</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+
+  <style>
+    :root {
+      /* Palette inspired by the Goethe-Institut visual identity */
+      --bg: #FAFAF7;
+      --ink: #15171a;
+      --muted: #717a83;        /* Pale Sky */
+      --soft: #9ca3af;
+      --accent: #303600;       /* Madras — deep olive */
+      --highlight: #a5c500;    /* Pistachio — Goethe-Institut signature */
+      --rule: rgba(21,23,26,0.10);
+    }
+
+    html, body { background: var(--bg); }
+    .reveal-viewport { background: var(--bg) !important; }
+
+    .reveal {
+      font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .reveal .slides { text-align: left; }
+    .reveal .slides section {
+      padding: 5rem 5.5rem;
+      box-sizing: border-box;
+      height: 100%;
+    }
+
+    /* Typography */
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Ubuntu', sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      text-transform: none;
+      color: var(--ink);
+      margin: 0 0 1.6rem 0;
+    }
+    .reveal h1 { font-size: 7.6rem; font-weight: 700; }
+    .reveal h2 { font-size: 3.8rem; font-weight: 700; }
+    .reveal h3 { font-size: 2.6rem; font-weight: 500; }
+    .reveal p, .reveal li {
+      font-size: 1.85rem;
+      line-height: 1.5;
+      color: var(--ink);
+      font-weight: 400;
+    }
+    .reveal strong { font-weight: 700; }
+    .reveal em {
+      font-family: 'Ubuntu', sans-serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .reveal .muted { color: var(--muted); }
+    .reveal .small { font-size: 1.2rem; letter-spacing: 0.02em; }
+    .reveal .label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.6rem;
+    }
+    .reveal .accent { color: var(--accent); }
+
+    /* Lists */
+    .reveal ul { list-style: none; padding-left: 0; margin: 0; }
+    .reveal ul li {
+      padding-left: 1.6rem;
+      position: relative;
+      margin-bottom: 0.85rem;
+    }
+    .reveal ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.8em;
+      width: 0.75rem;
+      height: 2px;
+      background: var(--highlight);
+    }
+    .reveal ol {
+      counter-reset: item;
+      list-style: none;
+      padding-left: 0;
+    }
+    .reveal ol li {
+      counter-increment: item;
+      padding-left: 3.2rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .reveal ol li::before {
+      content: counter(item, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0.05em;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 300;
+      color: var(--accent);
+      font-size: 1.1em;
+      letter-spacing: -0.02em;
+    }
+
+    /* Editorial 2-column layout — green slide bg, title block left, white card right */
+    .split {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 4rem;
+      height: 100%;
+      align-items: stretch;
+    }
+    .split .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    /* Left title block sits on green — adjust accents for contrast */
+    .split .left .rule { background: var(--accent); }
+    .split .left .kicker { color: rgba(48, 54, 0, 0.7); }
+    .split .right {
+      background: var(--bg);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 8px 40px rgba(48, 54, 0, 0.1);
+    }
+    .split .right .footnote {
+      position: absolute;
+      left: 3rem;
+      right: 3rem;
+      bottom: 2.5rem;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    /* Sub-grid for paired lists inside the card */
+    .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    /* Cover & closing — full-bleed centered */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      min-height: 80vh;
+    }
+    .cover .top, .cover .footer {
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .cover .top {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    .cover .footer {
+      font-size: 1.15rem;
+    }
+
+    /* Phases — vertical timeline within card */
+    .phases-vertical { display: flex; flex-direction: column; gap: 1.8rem; }
+    .phases-vertical .phase {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 1.4rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.2rem;
+      align-items: start;
+    }
+    .phases-vertical .phase .num {
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 300;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .phases-vertical .phase .name {
+      font-size: 1.7rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .phases-vertical .phase .desc {
+      font-size: 1.35rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .rule {
+      height: 3px;
+      background: var(--highlight);
+      width: 3.5rem;
+      margin: 1.4rem 0 1.6rem;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 1.35rem;
+      line-height: 1.5;
+      margin-top: 0.6rem;
+      max-width: 24rem;
+    }
+
+    .footnote {
+      margin-top: auto;
+      padding-top: 2.5rem;
+      color: var(--soft);
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Group labels for urgency split */
+    .group-label {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .group-label.muted { color: var(--muted); }
+
+    /* Cover variant — full Pistachio bleed */
+    .bg-green .top,
+    .bg-green .footer { color: rgba(48, 54, 0, 0.65); }
+    .bg-green .muted { color: rgba(48, 54, 0, 0.8); }
+    .bg-green .label { color: var(--accent); opacity: 0.85; }
+
+    /* Reveal chrome */
+    .reveal .progress { color: var(--highlight); height: 3px; }
+    .reveal .progress span { transition: transform 250ms ease; }
+    .reveal .controls { color: var(--soft); }
+    .reveal .slide-number {
+      background: transparent;
+      color: var(--soft);
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      right: 2rem;
+      bottom: 1.5rem;
+    }
+
+    @media print {
+      .reveal .slide-number { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 1 · Cover -->
+      <section class="bg-green" data-background-color="#a5c500">
+        <div class="cover">
+          <div class="top">pnk-solutions.gr</div>
+          <div>
+            <div class="label">Project kickoff · 6 May 2026</div>
+            <h1>Deutsch bewegt!</h1>
+            <p class="muted" style="font-size: 2.1rem; margin-top: 1.4rem; font-weight: 300;">
+              Website design & development
+            </p>
+          </div>
+          <div class="footer small">First online working meeting</div>
+        </div>
+      </section>
+
+      <!-- 2 · Deliverables -->
+      <section data-background-color="#a5c500">
+        <div class="split">
+          <div class="left">
+            <div class="label">01 · Deliverables</div>
+            <h2>What we'll deliver.</h2>
+            <div class="rule"></div>
+            <p class="kicker">Based on the agreement and the February 2026 offer.</p>
+          </div>
+          <div class="right">
+            <div class="pair">
+              <ul>
+                <li>Bilingual responsive website <span class="muted">(DE / EL)</span></li>
+                <li>Full page structure & bilingual navigation</li>
+                <li>Program & speakers by year</li>
+                <li>Archive of previous years</li>
+                <li>Workshop sign-up system</li>
+                <li>Tables & export to CSV / Excel</li>
+                <li>Admin panel for non-technical organizers</li>
+                <li>Automated emails with custom template</li>
+                <li>Newsletter with consent</li>
+              </ul>
+              <ul>
+                <li>Failure notification & resend mechanism</li>
+                <li>Certificates of attendance (PDF)</li>
+                <li>Participant QR check-in</li>
+                <li>Evaluation form with export</li>
+                <li>Partners-only area with password</li>
+                <li><em>Save-the-date</em> video promo</li>
+                <li>Basic SEO & Open Graph setup</li>
+                <li>GDPR / Cookies / policy pages</li>
+                <li>Documentation & user guide</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 · What we need from you -->
+      <section data-background-color="#a5c500">
+        <div class="split">
+          <div class="left">
+            <div class="label">02 · Material & involvement</div>
+            <h2>What we need from you.</h2>
+            <div class="rule"></div>
+            <p class="kicker">Receipt of material starts the development clock.</p>
+          </div>
+          <div class="right">
+            <div class="pair">
+              <div>
+                <div class="group-label">Urgent</div>
+                <ul>
+                  <li>Event date & start date</li>
+                  <li>Point of contact & final milestone approver</li>
+                  <li>Brand assets <span class="muted">(logos, colors, typography)</span></li>
+                  <li>Initial texts in <strong>DE & EL</strong> for Phase 1</li>
+                  <li>Site map & wireframes approval</li>
+                </ul>
+              </div>
+              <div>
+                <div class="group-label muted">Normal</div>
+                <ul>
+                  <li>Photo material for the past-years archive</li>
+                  <li>Material for the partners-only area</li>
+                  <li>Brief for the <em>save-the-date</em> video</li>
+                  <li>Certificate template approval</li>
+                  <li>Privacy / cookies / GDPR text</li>
+                  <li>Inbound link from <em>goethe-institut.de</em></li>
+                  <li>Staffing for QR check-in at the event</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 · Timeline -->
+      <section data-background-color="#a5c500">
+        <div class="split">
+          <div class="left">
+            <div class="label">03 · Timeline</div>
+            <h2>10–12 weeks, three phases.</h2>
+            <div class="rule"></div>
+            <p class="kicker">Each phase closes with approval before we move on.</p>
+          </div>
+          <div class="right">
+            <div class="phases-vertical">
+              <div class="phase">
+                <div class="num">01</div>
+                <div>
+                  <div class="name">Analysis & design</div>
+                  <div class="desc">Site map, mockups, wireframes — approval before development.</div>
+                </div>
+              </div>
+              <div class="phase">
+                <div class="num">02</div>
+                <div>
+                  <div class="name">Development</div>
+                  <div class="desc">Bilingual navigation, features, initial content entry.</div>
+                </div>
+              </div>
+              <div class="phase">
+                <div class="num">03</div>
+                <div>
+                  <div class="name">QA & delivery</div>
+                  <div class="desc">QA, device & browser testing, final publication.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · Closing -->
+      <section class="bg-green" data-background-color="#a5c500">
+        <div class="cover">
+          <div class="top">pnk-solutions.gr</div>
+          <div>
+            <h1>Thank you.</h1>
+            <p class="muted" style="font-size: 2.1rem; margin-top: 1.6rem; font-weight: 300;">
+              Questions & discussion.
+            </p>
+          </div>
+          <div class="footer small">info@pnk-solutions.gr</div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      slideNumber: 'c/t',
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      width: 1920,
+      height: 1080,
+      margin: 0.04,
+      minScale: 0.3,
+      maxScale: 2.0,
+      pdfSeparateFragments: false
+    });
+  </script>
+</body>
+</html>
