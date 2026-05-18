@@ -1,44 +1,68 @@
-# Deutsch bewegt! — Project Guide
+# PnK Software Solutions — HQ
 
-## What this project is
+Operational hub for **PnK Software Solutions**: client engagements, internal admin, and project management. This repo holds **scope, context, and coordination** — application code for individual projects lives elsewhere (separate repos per project, or as decided per engagement).
 
-Website for the **"Deutsch bewegt!"** event (Goethe-Institut): an external
-bilingual site (German / Greek) that hosts info, program, workshop sign-ups,
-certificates, evaluation, a partners-only area, and an archive of previous
-years.
+## Structure
 
-Full offer and functional spec: [Specs/Goethe offer Deutsch bewegt website.md](Specs/Goethe%20offer%20Deutsch%20bewegt%20website.md)
+```
+pk-hq/
+├── CLAUDE.md                       ← this file (PnK-wide rules)
+├── .mcp.json                       ← ClickUp MCP wiring (PnK-wide)
+├── clients/<client>/<project>/     ← per-project workspace, with its own CLAUDE.md
+└── pnk/                            ← (future) internal PnK matters: capacity, invoicing, admin
+```
+
+Currently active engagements:
+
+- [clients/goethe/deutsch-bewegt/](clients/goethe/deutsch-bewegt/) — bilingual event website for Goethe-Institut.
 
 ## Who works in this repo
 
-Two collaborators with different modes:
+Two collaborators / co-founders:
 
-- **Panagiotis — developer.** All code, infrastructure, implementation.
-- **Konstantina — research & project management.** No coding tasks.
-  Her workspace is [pm/](pm/) — follow [pm/CLAUDE.md](pm/CLAUDE.md) when
-  working there.
+- **Panagiotis** — all code, infrastructure, technical decisions. Comfortable with both Greek and English.
+- **Konstantina** — digital marketing, research, project management. Non-technical. Her workspace inside any project is `*/pm/`, governed by that project's `pm/CLAUDE.md`.
 
-## Persona inference — don't ask, infer
+Persona labels in this repo are **always the names** (`panagiotis`, `konstantina`) — never role-based aliases like `dev` or `pm`. A name carries both identity (who is at the keyboard) and typical mode (the kind of work they usually do), but it does not lock the mode: Panagiotis sometimes does PM work; Konstantina is doing more business-side work over time. The current task signals which mode to operate in.
 
-Do **not** start sessions with "who am I talking to?". Infer from context:
+## Persona resolution — don't ask, resolve
 
-1. **Working directory.** If CWD is inside `/pm`, assume PM persona
-   (Konstantina) and apply [pm/CLAUDE.md](pm/CLAUDE.md). Otherwise, assume
-   developer (Panagiotis).
-2. **First-message signals** sharpen the inference:
-   - Greek + research / meeting / stakeholder / email / decision-log /
-     timeline tasks → PM.
-   - English + code / infra / deploy / refactor / tech-decision tasks → dev.
-3. **Confirm only when signals conflict** — e.g. a clearly PM task at repo
-   root, or a clearly dev task while in `/pm`. A one-line check is enough:
-   *"Quick check — is this PM work or dev work? (sets how I proceed.)"*
+Do **not** start sessions with "who am I talking to?". Resolve in this order:
 
-Default behavior rules:
+1. **Explicit in-session instruction wins.** *"I'm Konstantina right now"* → use that and stop.
+2. **`CLAUDE.local.md` at repo root** (gitignored, per-machine). If it contains `persona: panagiotis` or `persona: konstantina`, treat it as the default persona for this session.
+3. **Fallback: infer from context** (language is *not* a signal — both write in both languages):
+   - **Working directory.**
+     - CWD inside any `*/pm/` subdir → assume Konstantina; apply the nearest `pm/CLAUDE.md`.
+     - CWD inside `clients/<client>/<project>/` (not under `pm/`) → assume Panagiotis, project-scoped.
+     - CWD at repo root or `pnk/` → assume Panagiotis, PnK-wide / cross-client work.
+   - **Task type sharpens the inference.**
+     - Research / meeting notes / stakeholder / email drafts / decision log / timeline / client-facing artifacts → leans Konstantina.
+     - Code / infra / deploy / refactor / tech decisions / repo structure → leans Panagiotis.
+4. **Confirm only when signals conflict with the active persona** — e.g. `persona: konstantina` is set but the request is *"deploy this to prod"*, or a clearly Konstantina-shaped task at repo root with no `CLAUDE.local.md`. One-line check: *"Quick check — is this Panagiotis or Konstantina work? (sets how I proceed.)"*
 
-- Inside [pm/](pm/), `pm/CLAUDE.md` extends and overrides this file.
-- Everywhere else, full developer mode.
-- Never modify files in `/pm` during dev tasks without explicit request —
-  that's the PM workspace.
+### When Panagiotis does PM-style work (or vice versa)
+
+The active persona stays the same (the person hasn't changed), but adapt the *mode* to the task:
+
+- Apply the PM workspace conventions ([`pm/CLAUDE.md`](clients/goethe/deutsch-bewegt/pm/CLAUDE.md)) for templates and file conventions, regardless of who's doing it.
+- Keep response language matching what the user wrote.
+- Don't impose Konstantina-specific constraints (e.g. "no dev commands") on Panagiotis just because he's doing PM-style work.
+
+### Default behavior rules
+
+- Inside `*/pm/`, the project's `pm/CLAUDE.md` extends and overrides this file.
+- Inside `clients/<client>/<project>/`, that project's `CLAUDE.md` extends and overrides this file.
+- Never modify files in another client's directory while working on a given client, unless explicitly asked.
+- Never modify files under any `pm/` during code/infra tasks without explicit request — that's the PM workspace.
+
+## Cross-client confidentiality
+
+Multiple clients live in this repo.
+
+- **Never reference one client's information in artifacts produced for another client.** Treat each `clients/<X>/` as a sealed context for outbound work.
+- When asked cross-client questions internally ("which clients have overdue invoices?", "where am I overcommitted?"), it is fine to read across — but only for internal answers to Panagiotis, never in client-facing output.
+- If a client's contract requires hard data isolation, that client gets its own separate repo — flag the conflict rather than working around it here.
 
 ## Response style
 
@@ -53,44 +77,18 @@ Default behavior rules:
 
 Tasks live in **ClickUp**; the repo owns scope and durable context. They reference each other — they don't mirror.
 
-- **ClickUp list:** **Goethe** (`901510874240`) — path `Workspace > Team Space > Clients > Goethe`. MCP server: `clickup-pnk`.
-- **ClickUp** for anything with lifecycle state: work items, assignees, due dates, dependencies.
-- **Repo markdown** for scope ([deliverables.md](deliverables.md)), decisions, research, stakeholders, meeting notes.
+- **ClickUp** for anything with lifecycle state: work items, assignees, due dates, dependencies. MCP server: `clickup-pnk`.
+- **Repo markdown** for scope, decisions, research, stakeholders, meeting notes.
+- **Each project's CLAUDE.md** names that project's ClickUp list ID and any project-specific conventions.
 
 ### For Claude
 
-- "Create a task / what's open / due this week?" → use the ClickUp MCP (`clickup-pnk`) against the **Goethe** list (`901510874240`).
-- "What was promised / note this decision / summarize the meeting?" → repo markdown.
+- "Create a task / what's open / due this week?" → use the ClickUp MCP (`clickup-pnk`) against the **active project's list** (named in that project's CLAUDE.md).
+- "What was promised / note this decision / summarize the meeting?" → repo markdown, inside the relevant project directory.
 - **Crossover:** action items captured in meeting notes get created as ClickUp tasks, with the task IDs/URLs pasted back into the note for traceability.
-- **Scope vs work:** [deliverables.md](deliverables.md) checkboxes reflect *organizer sign-off* — a scope state. A ClickUp task can be "done" for weeks before the corresponding checkbox is ticked.
+- **Scope vs work:** project `deliverables.md` checkboxes reflect *client sign-off* — a scope state. A ClickUp task can be "done" for weeks before the corresponding checkbox is ticked.
 
-### Light ClickUp convention (to seed before the list grows)
+### Shared ClickUp conventions
 
-- **Custom field `spec_ref`** (text) — e.g. `A8#4`, `A6.8` — cross-reference to the offer spec.
-- **Tags** — `phase-1` / `phase-2` / `phase-3` for lifecycle; `pm` / `dev` / `organizer` for who's acting.
-
-## Tech stack
-
-_TBD — to be decided before implementation. Document here once set._
-
-## Product constraints worth remembering (from the spec)
-
-- **Bilingual parity.** Every page must exist in DE and EL, with clear language
-  toggle.
-- **Hosted outside `goethe.de`.** Linked from the Goethe-Institut site, not
-  under its domain.
-- **Certificates** go only to users who registered online **and** have
-  `status = "attended"`.
-- **GDPR** on every form (signup, evaluation, marketing consent).
-- **Admin panel** must be usable by non-technical organizers (exports to CSV/Excel,
-  manual resend, manual certificate issuance).
-- **Email deliverability** matters — a third-party sending service will be used;
-  bounce/failure handling via resend.
-- **QR check-in is optional** (+€480); fallback is an uploaded "attended" list.
-
-## Cost & timeline baseline (from offer)
-
-- Development: **€4.200 + VAT** (lump sum on delivery).
-- Yearly hosting, support, content refresh: **€700 / year + VAT**.
-- Optional QR check-in: **€480 + VAT**.
-- Timeline: **10–12 weeks** from kickoff and receipt of material.
+- **Custom field `spec_ref`** (text) — cross-reference into the project's spec (e.g. `A8#4`, `A6.8`).
+- **Tags** — `phase-1` / `phase-2` / `phase-3` for lifecycle; `panagiotis` / `konstantina` / `client` for who's acting.

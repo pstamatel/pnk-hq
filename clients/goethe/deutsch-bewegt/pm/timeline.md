@@ -31,8 +31,8 @@ _Not started._
 
 ## Open questions (to decide before kickoff)
 
-- [ ] Tech stack — developer decision
-- [ ] Hosting provider — developer decision
-- [ ] Content source & timing from Goethe-Institut — PM to clarify
-- [ ] QR check-in in scope or not — organizer decision
-- [ ] Final approver for milestones — PM to confirm
+- [ ] Tech stack — Panagiotis to decide
+- [ ] Hosting provider — Panagiotis to decide
+- [ ] Content source & timing from Goethe-Institut — Konstantina to clarify
+- [ ] QR check-in in scope or not — client decision (Goethe-Institut)
+- [ ] Final approver for milestones — Konstantina to confirm
