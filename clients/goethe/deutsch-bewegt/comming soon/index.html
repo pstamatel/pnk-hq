@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Deutsch bewegt! · Bald online · Σύντομα κοντά σας</title>
+    <meta
+      name="description"
+      content="Deutsch bewegt!: Die DaF-Konferenz in Griechenland. Die neue Website ist in Vorbereitung. Η νέα ιστοσελίδα ετοιμάζεται."
+    />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="assets/deutsch-bewegt-logo.webp"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap"
+    />
+
+    <style>
+      :root {
+        --green: #a8c93a;
+        --mid: #3aa685;
+        --blue: #1e6fb8;
+        --ink: #14233a;
+        --ink-soft: #3d5775;
+        --muted: #7b91ab;
+        --hairline: #e1e8f0;
+        --bg: #f6f8fb;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "DM Sans",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        font-weight: 400;
+        font-feature-settings: "ss01" on;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .aurora {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .aurora::before,
+      .aurora::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.55;
+        animation: drift 18s ease-in-out infinite alternate;
+      }
+
+      .aurora::before {
+        width: 620px;
+        height: 620px;
+        top: -180px;
+        left: -140px;
+        background: radial-gradient(
+          circle at center,
+          rgba(168, 201, 58, 0.55),
+          rgba(168, 201, 58, 0) 70%
+        );
+      }
+
+      .aurora::after {
+        width: 720px;
+        height: 720px;
+        bottom: -220px;
+        right: -180px;
+        background: radial-gradient(
+          circle at center,
+          rgba(30, 111, 184, 0.45),
+          rgba(30, 111, 184, 0) 70%
+        );
+        animation-delay: -9s;
+      }
+
+      .aurora .glow {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at center,
+          rgba(58, 166, 133, 0.28),
+          rgba(58, 166, 133, 0) 70%
+        );
+        filter: blur(70px);
+        animation: drift 22s ease-in-out infinite alternate-reverse;
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(40px, 30px) scale(1.08);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .aurora::before,
+        .aurora::after,
+        .aurora .glow,
+        .content,
+        .logo {
+          animation: none !important;
+        }
+      }
+
+      .page {
+        flex: 1;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding: clamp(32px, 6vw, 72px) clamp(24px, 5vw, 64px);
+      }
+
+      main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .content {
+        width: 100%;
+        max-width: 640px;
+        text-align: center;
+        animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .eyebrow {
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        margin: 0 0 56px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .pulse {
+        position: relative;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--mid);
+        box-shadow: 0 0 0 0 rgba(58, 166, 133, 0.6);
+        animation: pulse 2.4s ease-out infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(58, 166, 133, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 12px rgba(58, 166, 133, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(58, 166, 133, 0);
+        }
+      }
+
+      .logo {
+        width: 100%;
+        max-width: 560px;
+        height: auto;
+        margin: 0 auto 64px;
+        display: block;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      h1,
+      h2 {
+        font-family: inherit;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        margin: 0;
+        color: var(--ink);
+      }
+
+      h1 {
+        font-size: clamp(1.875rem, 4vw, 2.375rem);
+        line-height: 1.2;
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 3.2vw, 1.9rem);
+        line-height: 1.25;
+        color: var(--ink-soft);
+      }
+
+      .lede {
+        margin: 14px auto 0;
+        max-width: 460px;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--ink-soft);
+        letter-spacing: -0.005em;
+      }
+
+      .divider {
+        width: 1px;
+        height: 64px;
+        margin: 48px auto;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--green) 30%,
+          var(--mid) 50%,
+          var(--blue) 70%,
+          transparent
+        );
+        opacity: 0.7;
+      }
+
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 32px;
+        border-top: 1px solid var(--hairline);
+        font-size: 0.78rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+      }
+
+      footer .lang {
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true">
+      <div class="glow"></div>
+    </div>
+
+    <div class="page">
+      <main>
+        <section class="content">
+          <p class="eyebrow">
+            <span class="pulse" aria-hidden="true"></span>
+            Coming soon · 2026
+          </p>
+
+          <img
+            class="logo"
+            src="assets/deutsch-bewegt-logo.webp"
+            alt="Deutsch bewegt!: Die DaF-Konferenz in Griechenland"
+          />
+
+          <h1 lang="de">Deutsch bewegt! geht in die nächste Runde.</h1>
+          <p class="lede" lang="de">
+            Programm, Workshops und Anmeldung: bald an dieser Stelle.
+          </p>
+
+          <div class="divider" aria-hidden="true"></div>
+
+          <h2 lang="el">Το Deutsch bewegt! επιστρέφει.</h2>
+          <p class="lede" lang="el">
+            Πρόγραμμα, εργαστήρια και εγγραφές: σύντομα εδώ.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <span class="lang">DE · EL</span>
+      </footer>
+    </div>
+  </body>
+</html>

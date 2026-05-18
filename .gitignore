@@ -1,3 +1,6 @@
-# Claude Code personal settings — per-user, not shared
+# Claude Code personal settings, per-user, not shared
 .claude/settings.local.json
 CLAUDE.local.md
+
+# macOS Finder metadata
+.DS_Store
